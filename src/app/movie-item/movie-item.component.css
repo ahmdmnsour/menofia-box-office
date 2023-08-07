@@ -1,0 +1,16 @@
+.movie-list-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.movie-poster {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.movie-details {
+    flex: 1;
+}

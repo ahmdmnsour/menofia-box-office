@@ -1,0 +1,11 @@
+<input type="text" (keyup)="filter(search.value)" placeholder="Search" #search>
+
+<movie-item 
+    *ngFor="let movie of movies"
+    [movie-title]="movie['title']"
+    [release-date]="movie['release_date']"
+    [poseter]="posterBaseUrl + movie['poster_path']"
+    [rating]="movie['vote_average']"
+    [routerLink]="['/details', movie['id']]"></movie-item>
+
+<p *ngIf="!noRes">no results</p>
