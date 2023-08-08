@@ -1,4 +1,29 @@
-<h2 class="movie-title">{{details['title']}}</h2>
-<div class="movie-details">
-    <p><strong>Genre:</strong> {{genres}}</p>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <img [src]="imgUrl" class="img-fluid">
+        </div>
+        <div class="col-md-8">
+            <h1>{{details['title']}}</h1>
+
+            <div>
+                <p><strong>Overview: </strong>{{details['overview']}}</p>
+                <p><strong>Genre: </strong>{{genres}}</p>
+            </div>
+
+            <h2>Reviews</h2>
+            <ul class="list-group">
+                <li *ngFor="let review of reviews" class="list-group-item">
+                    <p><strong>{{review['author']}} </strong>{{review['content']}}</p>
+                </li>
+            </ul>
+
+            <h2>Cast</h2>
+            <ul class="list-group">
+                <li *ngFor="let cast of casts" class="list-group-item">
+                    <p><strong>{{cast['name']}} </strong>{{cast['character']}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

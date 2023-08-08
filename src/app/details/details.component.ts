@@ -10,6 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 export class DetailsComponent {
   movieId: string = '';
   details: any = {};
+  imgUrl = '';
+  reviews = [];
+  casts = [];
 
   genres: string = '';
 
@@ -17,6 +20,7 @@ export class DetailsComponent {
 
   ngOnInit() {
     this.movieId = this.route.snapshot.paramMap.get('id')!;
+
     this.service.getMovieDetails(this.movieId!)
       .subscribe(response => {
         this.details = response;
@@ -24,7 +28,20 @@ export class DetailsComponent {
           this.genres += element['name'] + ', ';
         });
         this.genres = this.genres.slice(0, -2);
-        console.log(this.details);
+      });
+    this.service.getMovieImages(this.movieId)
+      .subscribe((response: any) => {
+        this.imgUrl = this.service.poseterUrl + response['posters'][1]['file_path'];
+      });
+    this.service.getMovieReviews(this.movieId)
+      .subscribe((response: any) => {
+        this.reviews = response['results'];
+      });
+
+    this.service.getMovieCredits(this.movieId)
+      .subscribe((response: any) => {
+        this.casts = response['cast'];
+        console.log(this.casts);
       });
   }
 }

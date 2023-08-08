@@ -17,6 +17,10 @@ export class HomeComponent {
   }
 
   ngOnInit() {
+    this.getPopularMovies();
+  }
+
+  getPopularMovies() {
     this.service.getMovies()
       .subscribe(response => {
         this.movies = response;
@@ -25,21 +29,17 @@ export class HomeComponent {
   }
 
   filter(searchValue: string) {
+    this.noRes = false;
     if (!searchValue) {
-      this.service.getMovies()
-        .subscribe(response => {
-          this.movies = response;
-          this.movies = this.movies['results'];
-        });
+      this.getPopularMovies();
     } else {
       this.service.searchForMovies(searchValue)
         .subscribe(response => {
           this.movies = response;
           this.movies = this.movies['results'];
-          if(!this.movies) {
+          if(this.movies.length === 0) {
+            console.log('dd');
             this.noRes = true;
-          } else {
-            this.noRes = false;
           }
         });
     }

@@ -12,21 +12,27 @@ export class MovieService {
   constructor(private httpClient: HttpClient) { }
 
   getMovies() {
-    return this.httpClient.get('https://api.themoviedb.org/3/movie/popular', {
-      headers: this.header
-    });
+    return this.httpClient.get('https://api.themoviedb.org/3/movie/popular');
   }
 
   searchForMovies(movieTitle: string) {
-    return this.httpClient.get('https://api.themoviedb.org/3/search/movie?query=' + movieTitle, {
-      headers: this.header
-    });
+    return this.httpClient.get('https://api.themoviedb.org/3/search/movie?query=' + movieTitle);
+  }
+
+  getMovieImages(movieId: string) {
+    return this.httpClient.get('https://api.themoviedb.org/3/movie/' + movieId + '/images');
   }
 
   getMovieDetails(movieId: string) {
-    return this.httpClient.get('https://api.themoviedb.org/3/movie/' + movieId, {
-      headers: this.header
-    });
+    return this.httpClient.get('https://api.themoviedb.org/3/movie/' + movieId);
+  }
+
+  getMovieReviews(movieId: string) {
+    return this.httpClient.get('https://api.themoviedb.org/3/movie/' + movieId + '/reviews');
+  }
+
+  getMovieCredits(movieId: string) {
+    return this.httpClient.get('https://api.themoviedb.org/3/movie/' + movieId + '/credits');
   }
 
   public get poseterUrl() {
