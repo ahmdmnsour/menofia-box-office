@@ -18,32 +18,30 @@ export class HomeComponent {
   }
 
   ngOnInit() {
-    this.getPopularMovies();
+    this.getPopularMovies(1);
   }
 
-  getPopularMovies() {
-    this.service.getMovies()
+  getPopularMovies(pageIndex: number) {
+    this.service.getMovies(pageIndex)
       .subscribe((response: any) => {
         this.movies = response['results'];
-        this.moviesLength = this.movies.length;
+        this.moviesLength = response['total_results'];
       });
   }
 
   filter(searchValue: string, pageIndex: number) {
     this.noRes = false;
-    if (!searchValue) {
-      this.getPopularMovies();
+    if (searchValue === '') {
+      this.getPopularMovies(pageIndex);
     } else {
       this.service.searchForMovies(searchValue, pageIndex)
         .subscribe((response: any) => {
           this.movies = response['results'];
           this.moviesLength = response['total_results'];
-          console.log(response);
           if (this.movies.length === 0) {
             this.noRes = true;
           }
         });
     }
-    console.log(this.moviesLength);
   }
 }

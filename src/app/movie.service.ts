@@ -11,8 +11,8 @@ export class MovieService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getMovies() {
-    return this.httpClient.get('https://api.themoviedb.org/3/movie/popular');
+  getMovies(page: number) {
+    return this.httpClient.get('https://api.themoviedb.org/3/movie/popular?page=' + page);
   }
 
   searchForMovies(movieTitle: string, page: number) {
