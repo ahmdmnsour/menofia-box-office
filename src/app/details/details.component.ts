@@ -41,7 +41,6 @@ export class DetailsComponent {
     this.service.getMovieCredits(this.movieId)
       .subscribe((response: any) => {
         this.casts = response['cast'];
-        console.log(this.casts);
       });
   }
 }

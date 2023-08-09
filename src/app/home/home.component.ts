@@ -8,6 +8,7 @@ import { MovieService } from '../movie.service';
 })
 export class HomeComponent {
   movies: any = [];
+  moviesLength!: number;
 
   posterBaseUrl = '';
   noRes = false;
@@ -22,26 +23,27 @@ export class HomeComponent {
 
   getPopularMovies() {
     this.service.getMovies()
-      .subscribe(response => {
-        this.movies = response;
-        this.movies = this.movies['results'];
+      .subscribe((response: any) => {
+        this.movies = response['results'];
+        this.moviesLength = this.movies.length;
       });
   }
 
-  filter(searchValue: string) {
+  filter(searchValue: string, pageIndex: number) {
     this.noRes = false;
     if (!searchValue) {
       this.getPopularMovies();
     } else {
-      this.service.searchForMovies(searchValue)
-        .subscribe(response => {
-          this.movies = response;
-          this.movies = this.movies['results'];
-          if(this.movies.length === 0) {
-            console.log('dd');
+      this.service.searchForMovies(searchValue, pageIndex)
+        .subscribe((response: any) => {
+          this.movies = response['results'];
+          this.moviesLength = response['total_results'];
+          console.log(response);
+          if (this.movies.length === 0) {
             this.noRes = true;
           }
         });
     }
+    console.log(this.moviesLength);
   }
 }

@@ -15,8 +15,8 @@ export class MovieService {
     return this.httpClient.get('https://api.themoviedb.org/3/movie/popular');
   }
 
-  searchForMovies(movieTitle: string) {
-    return this.httpClient.get('https://api.themoviedb.org/3/search/movie?query=' + movieTitle);
+  searchForMovies(movieTitle: string, page: number) {
+    return this.httpClient.get('https://api.themoviedb.org/3/search/movie?query=' + movieTitle + '&page=' + page);
   }
 
   getMovieImages(movieId: string) {
